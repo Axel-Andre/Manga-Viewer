@@ -1,6 +1,6 @@
 {
     "paths": {
-        "GET_SOME": "/manga?",
+        "GET_SOME": "/manga?sort=-averageRating&",
         "GET_ONE": "/manga/",
         "SEACH_SOME": "/manga"
     }

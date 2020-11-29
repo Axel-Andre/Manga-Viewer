@@ -1,26 +1,35 @@
 <template>
-  <div id="nav">
-    <router-link to="/" class="mr-4">Accueil</router-link>
+  <div id="nav" class="flex w-full justify-center items-center">
+    <router-link to="/" class="text-lg mr-4">Explore</router-link>
+    <router-link to="/favorites" class="mr-auto text-lg">Favorites</router-link>
     <form
-      v-if="$route.path == '/'"
+      v-if="$route.name != '/manga'"
       @submit.prevent="goToSearchPage()"
-      class="inline-block relative"
+      class="inline-block relative justify-end mr-auto"
     >
       <input
-        class="border border-gray-300 rounded-md py-4 px-8 leading-4"
+        class="border border-gray-300 w-96 rounded-md py-4 px-4 leading-4 placeholder-gray-300 italic outline-none focus:ring focus:border-blue-500"
         type="search"
         id="site-search"
         name="s"
+        placeholder="Search ..."
         v-model="searchText"
         autocomplete="off"
         @keyup="updateSuggestions(searchText)"
         @focus="updateSuggestions(searchText)"
         @blur.capture="goToMangaPage"
-
       />
-      <div v-if="searchText && suggestions.length && !hideSuggestions" class="suggestions">
-        <router-link v-for="sug in suggestions" :key="sug.id" :to="`/manga/${sug.id}`" @click="suggestions = []">
-          <div class="suggestion" >
+      <div
+        v-if="searchText && suggestions.length && !hideSuggestions"
+        class="suggestions"
+      >
+        <router-link
+          v-for="sug in suggestions"
+          :key="sug.id"
+          :to="`/manga/${sug.id}`"
+          @click="suggestions = []"
+        >
+          <div class="suggestion">
             <img
               class="suggestion__image"
               :src="sug.attributes.posterImage.tiny"
@@ -44,7 +53,7 @@ export default {
     return {
       searchText: null,
       suggestions: [],
-      hideSuggestions: false
+      hideSuggestions: false,
     };
   },
   methods: {
@@ -57,22 +66,19 @@ export default {
       const that = this;
       clearTimeout(timeout);
       timeout = setTimeout(async () => {
-        console.log("Appel fait");
         const suggestions = await mangaService.searchSome(searchText);
-        console.warn(suggestions);
         that.suggestions = suggestions;
-        console.log(that.suggestions);
         return clearTimeout(timeout);
       }, 300);
     },
-    goToMangaPage(event){
-      if(event.relatedTarget?.tagName === 'A'){
-        event.preventDefault;  
-      }else {
+    goToMangaPage(event) {
+      if (event.relatedTarget?.tagName === "A") {
+        event.preventDefault;
+      } else {
         this.hideSuggestions = true;
       }
-    }
-  },
+    },
+  }
 };
 </script>
 <style>
@@ -97,7 +103,7 @@ a.active-link {
 .suggestion__image {
   @apply h-20 mr-4 rounded;
 }
-main{
-  @apply w-2/3 mx-auto
+main {
+  @apply w-2/3 mx-auto;
 }
 </style>

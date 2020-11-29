@@ -23,14 +23,11 @@ export default {
   },
   async mounted() {
     const response = await mangaService.getSome();
-    console.log("RESPONSE: ", response);
     this.mangas = response;
   },
   methods: {
     async fetchPage(pageNumber) {
       const response = await mangaService.getSome(pageNumber);
-      console.warn("[FETCH_PAGE]", { response });
-      console.log("PAGENUMBER : ", pageNumber);
       this.mangas = response;
       this.currentPage = pageNumber;
     },
