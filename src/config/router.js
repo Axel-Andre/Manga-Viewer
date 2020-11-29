@@ -1,11 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import MangaList from './views/MangaList.vue'
-import HomeView from './views/Home.vue'
+import MangaDetails from '@/views/MangaDetails.vue'
+import HomeView from '@/views/Home.vue'
+import SearchView from '@/views/Search.vue'
 
 const routes = [
   { path: '/', component: HomeView },
-  { path: '/manga', component: MangaList },
+  { path: '/manga/:id', component: MangaDetails },
+  { path: '/search/:text', component: SearchView },
 ]
 
 const router = createRouter({

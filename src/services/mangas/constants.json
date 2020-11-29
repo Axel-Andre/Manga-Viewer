@@ -1,0 +1,7 @@
+{
+    "paths": {
+        "GET_SOME": "/manga?",
+        "GET_ONE": "/manga/",
+        "SEACH_SOME": "/manga"
+    }
+}

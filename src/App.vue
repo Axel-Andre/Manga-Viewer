@@ -1,10 +1,16 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/manga">Manga</router-link>
-  </div>
-  <router-view/>
+  <Layout>
+    <router-view />
+  </Layout>
 </template>
+<script>
+import Layout from "./layouts/Main";
+export default {
+  components: {
+    Layout,
+  },
+};
+</script>
 
 <style>
 #app {
@@ -17,14 +23,5 @@
 
 #nav {
   padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
